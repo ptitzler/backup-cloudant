@@ -1,0 +1,18 @@
+applications:
+- path: .
+  memory: 768M
+  instances: 1
+  domain: mybluemix.net
+  name: backup-cloudant
+  host: backup-cloudant
+  disk_quota: 1024M
+  env:
+    backup_interval: 86400000
+    database_name: "database"
+    cloudant_url: ""
+    os_auth_url: ""
+    os_projectId: ""
+    os_domainId: ""
+    os_username: ""
+    os_password: ""
+    os_region: ""
