@@ -1,6 +1,7 @@
 var yaml = require("js-yaml");
 var path = require("path");
 var fs = require("fs");
+var cfenv = require("cfenv");
 
 
 console.log("environment.exports() : process.env", process.env);
@@ -72,6 +73,8 @@ if (environment.localhost)
 else
 {
     console.log("environment.exports() : VCAP_APPLICATION");
+
+    environment.appEnv = cfenv.getAppEnv();
 
     copyEnvironment(process.env, environment, true);
 
