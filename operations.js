@@ -39,9 +39,11 @@ exports.backup = function(){
    			"COUCH_DATABASE": environment.database_name,
        		"COUCH_BUFFER_SIZE": 500
    			};
-    }   
+    } 
+
+    const stagingfile = 'backup.txt';
 	
-	couchbackup.backupStream(fs.createWriteStream("backup.txt"), opts, function(err, obj) 
+	couchbackup.backupStream(fs.createWriteStream(stagingfile), opts, function(err, obj) 
 	{	
 		if (err)
 		{
@@ -110,8 +112,10 @@ exports.backup = function(){
 			//Upload file
 			var fs = require('fs');
 			var date = new Date();
-			var containerName = date.getFullYear() + "-" + (date.getMonth() +1);
-			var fileName = (date.getMonth() + 1) + "-" + date.getDate() + "_" + date.toTimeString() + ".txt";
+			// name container after database
+			var containerName = environment.database_name;
+			// name backup file
+			var fileName = date.toISOString().substring(0,16).replace(":","-") + ".json";
 	
 			storageClient.createContainer({
 			    name: containerName
@@ -124,7 +128,7 @@ exports.backup = function(){
 			        } 
 			        else 
 			        {
-			            var rStream = fs.createReadStream('backup.txt');
+			            var rStream = fs.createReadStream(stagingfile);
 			            var upload = storageClient.upload({
 			                container: container.name,
 			                remote: fileName

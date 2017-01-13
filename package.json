@@ -1,6 +1,6 @@
 {
 	"name": "backup-cloudant",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"private": true,
 	"scripts": {
 		"start": "node app.js"
@@ -16,6 +16,6 @@
 	},
 	"repository": {},
 	"engines": {
-		"node": "4.x"
+		"node": "6.x"
 	}
 }

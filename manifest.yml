@@ -1,14 +1,18 @@
+declared-services:
+  cloudant-backups:
+    label: Object-Storage
+    plan: standard
 applications:
 - path: .
   memory: 768M
   instances: 1
   domain: mybluemix.net
-  name: backup-cloudant
-  host: backup-cloudant
+  name: dt-events-db-backup
+  no-route: true
   disk_quota: 1024M
   env:
-    backup_interval: 86400000
-    database_name: "database"
+    backup_interval: 604800000
+    database_name: "events"
     cloudant_url: ""
     os_auth_url: ""
     os_projectId: ""
@@ -16,3 +20,6 @@ applications:
     os_username: ""
     os_password: ""
     os_region: ""
+  services:
+  - cloudant-backups
+      
